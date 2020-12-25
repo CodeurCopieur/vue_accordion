@@ -8,7 +8,9 @@
         v-for="(faq, i) in faqs" 
         :key="i" 
         :faq="faq" 
-        :index="i" />
+        :index="i"
+        :open="faq.open"
+        @toggleOpen="toggleOpen" />
     </section>
   </div>
 </template>
@@ -40,6 +42,16 @@ export default {
           open: false
         }
       ]
+    }
+  },
+  methods: {
+    toggleOpen (index) {
+      this.faqs = this.faqs.map( (faq, i) => {
+        if(index === i) {
+          faq.open = !faq.open
+        }
+        return faq;
+      })
     }
   }
 }
@@ -75,5 +87,11 @@ header {
       font-weight: 900;
     }
   }
+}
+
+.faqs {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 </style>
